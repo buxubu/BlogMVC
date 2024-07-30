@@ -1,0 +1,103 @@
+﻿@model BlogMVC.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameProduct)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameProduct)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descrip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descrip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Video)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Video)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BestSaller)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BestSaller)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeFlag)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HomeFlag)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tag)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tag)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Alias)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Alias)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaDesc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MetaDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaKey)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MetaKey)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCateProNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdCateProNavigation.IdCatePro)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdProduct">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

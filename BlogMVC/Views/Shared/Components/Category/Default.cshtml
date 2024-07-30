@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Category>
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <li><a asp-controller="New" asp-action="Index" asp-route-id="@item.CaId">@item.CatName</a></li>
+    }
+
+}

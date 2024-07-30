@@ -1,0 +1,14 @@
+﻿@model BlogMVC.ModelViews.Cart
+
+
+@if (Model != null)
+{
+    <i class="fas fa-shopping-cart text-primary"></i>
+    <span class="badge">@Model.Lines.Count()</span>
+}
+else
+{
+    <i class="fas fa-shopping-cart text-primary"></i>
+    <span class="badge">0</span>
+}
+

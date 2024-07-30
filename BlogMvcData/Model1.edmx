@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbBlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Phone" Type="varchar" MaxLength="11" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Salt" Type="varchar" MaxLength="10" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CaID" />
+          </Key>
+          <Property Name="CaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="MetaDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="MetaKey" Type="nvarchar" MaxLength="255" />
+          <Property Name="Thumb" Type="nvarchar" MaxLength="255" />
+          <Property Name="Published" Type="bit" />
+          <Property Name="Ordering" Type="int" />
+          <Property Name="Parents" Type="int" />
+          <Property Name="Levels" Type="int" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cover" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaID" Type="int" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShortContent" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contents" Type="nvarchar(max)" />
+          <Property Name="Thumb" Type="nvarchar" MaxLength="255" />
+          <Property Name="Published" Type="bit" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Author" Type="nvarchar" MaxLength="255" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="isHot" Type="bit" />
+          <Property Name="isNewFeed" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Account__RoleID__29572725">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__AccountID__2A4B4B5E">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__CaID__2B3F6F97">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CaID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="CaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbBlogModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__RoleID__29572725" Association="Self.FK__Account__RoleID__29572725">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__AccountID__2A4B4B5E" Association="Self.FK__News__AccountID__2A4B4B5E">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__CaID__2B3F6F97" Association="Self.FK__News__CaID__2B3F6F97">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbBlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Account__RoleID__29572725" FromRole="Account" ToRole="Role" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__AccountID__2A4B4B5E" FromRole="Account" ToRole="News" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CaID" />
+          </Key>
+          <Property Name="CaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Thumb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="Boolean" />
+          <Property Name="Ordering" Type="Int32" />
+          <Property Name="Parents" Type="Int32" />
+          <Property Name="Levels" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cover" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__CaID__2B3F6F97" FromRole="Categories" ToRole="News" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaID" Type="Int32" Nullable="false" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShortContent" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thumb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="Boolean" />
+          <Property Name="Alias" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Author" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isHot" Type="Boolean" />
+          <Property Name="isNewFeed" Type="Boolean" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__News__AccountID__2A4B4B5E" FromRole="News" ToRole="Account" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__News__CaID__2B3F6F97" FromRole="News" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__RoleID__29572725" FromRole="Role" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK__Account__RoleID__29572725">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__AccountID__2A4B4B5E">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__CaID__2B3F6F97">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CaID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="CaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbBlogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <AssociationSet Name="FK__Account__RoleID__29572725" Association="Self.FK__Account__RoleID__29572725">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__AccountID__2A4B4B5E" Association="Self.FK__News__AccountID__2A4B4B5E">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__CaID__2B3F6F97" Association="Self.FK__News__CaID__2B3F6F97">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbBlogModelStoreContainer" CdmEntityContainer="DbBlogEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DbBlogModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DbBlogModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CaID" ColumnName="CaID" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MetaDesc" ColumnName="MetaDesc" />
+                <ScalarProperty Name="MetaKey" ColumnName="MetaKey" />
+                <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Ordering" ColumnName="Ordering" />
+                <ScalarProperty Name="Parents" ColumnName="Parents" />
+                <ScalarProperty Name="Levels" ColumnName="Levels" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="DbBlogModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="CaID" ColumnName="CaID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortContent" ColumnName="ShortContent" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="isHot" ColumnName="isHot" />
+                <ScalarProperty Name="isNewFeed" ColumnName="isNewFeed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DbBlogModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BlogMVC.Models.News>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Count() != 0)
+{
+    <div class="masonry-wrap">
+        <div class="masonry">
+            <div class="grid-sizer"></div>
+            <ar ticle class="masonry__brick entry format-quote animate-this">
+                <div class="entry__thumb">
+                    <blockquote>
+                        <p>On the way to success. There is no trace of lazy men.</p>
+                        @* <cite>Nguyen Van Phuc</cite>*@
+                    </blockquote>
+                </div>
+
+            </ar>
+            @foreach (var item in Model)
+            {
+                <article class="masonry__brick entry format-standard animate-this">
+
+                    <div class="entry__thumb">
+                        <a asp-action="Details" asp-route-id="@item.PostId" class="entry__thumb-link">
+                            <img src="~/images/@item.Thumb"
+                                 srcset="~/images/@item.Thumb 1x,~/images/@item.Thumb 2x" alt="">
+                        </a>
+                    </div>
+
+                    <div class="entry__text">
+                        <div class="entry__header">
+
+                            <h2 class="entry__title"><a asp-action="Details" asp-route-id="@item.PostId">@item.ShortContent</a></h2>
+                            <div class="entry__meta">
+                                <span class="entry__meta-cat">
+                                    <a href="category.html">@item.Author</a>
+                                    <a href="category.html">@item.CreateDate</a>
+                                </span>
+                                <span class="entry__meta-date">
+                                    <a href="single-standard.html">@item.CreateDate</a>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="entry__excerpt">
+                            <p>
+                                @item.ShortContent
+                            </p>
+                        </div>
+                    </div>
+
+                </article> <!-- end article -->
+            }
+            <ar ticle class="masonry__brick entry format-quote animate-this">
+                <div class="entry__thumb">
+                    <blockquote>
+                        <p>Today is not easy. Tomorrow is more difficult, but the day after tomorrow will be wonderful.</p>
+                        @* <cite>Nguyen Van Phuc</cite>*@
+                    </blockquote>
+                </div>
+
+            </ar> <!-- end article -->
+
+        </div>
+    </div>
+
+}
+else
+{
+    <h1>Not value in database to get. </h1>
+}
+

@@ -1,0 +1,165 @@
+﻿@model BlogMVC.Areas.Admin.Models.NewsViewModel;
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<h2>Create</h2>
+
+<h4>NEWS</h4>
+<hr />
+<!-- Form Element area Start-->
+<div class="form-element-area">
+    <div class="container">
+        <form asp-area="Admin" asp-controller="News" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-element-list">
+                        <div class="basic-tb-hd">
+                            <h2>TẠO MỚI DANH MỤC</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="text" class="form-control input-sm" asp-for="Title" placeholder="Title">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="text" class="form-control" asp-for="ShortContent" placeholder="Short Content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                        <div class="nk-int-st">
+                        <input type="datetime-local" class="form-control" asp-for="cre" placeholder="Contents">
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                        <div class="nk-int-st">
+                        <input type="text" class="form-control" asp-for="MetaKey" placeholder="Meta Key">
+                        </div>
+                        </div>
+                        </div>
+                        </div>*@
+                        <div class="row">
+                            @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="text" class="form-control" asp-for="Tags" placeholder="Tags">
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <select class="form-control" asp-for="CaId" asp-items="@ViewBag.CaId" required>
+                                            <option value="0" selected style="text-align:center">DANH MỤC</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                            <div class="nk-int-st">
+                            <label>Icon</label>
+                            <input type="file" name="fIcon" class="form-control" asp-for="fIcon" placeholder="Icon">
+                            </div>
+                            </div>
+                            </div>*@
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <label>Thumb</label>
+                                        <input type="file" name="fThumb" class="form-control" asp-for="fThumb" placeholder="Thumb">
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                            <div class="nk-int-st">
+                            <label>Cover</label>
+                            <input type="file" name="fCover" class="form-control" asp-for="fCover" placeholder="Cover">
+                            </div>
+                            </div>
+                            </div>*@
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-element-list mg-t-30">
+                                        <div class="basic-tb-hd">
+                                            <h2>Content</h2>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="nk-int-st">
+                                                        <textarea asp-for="Contents" ></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-element-list mg-t-30">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <div class="fm-checkbox">
+                                                                <label><input type="checkbox" asp-for="Published" class="i-checks"> <i></i>Published</label>
+                                                            </div>
+                                                            <div class="fm-checkbox">
+                                                                <label><input type="checkbox" asp-for="IsHot" class="i-checks"> <i></i>IsHot</label>
+                                                            </div>
+                                                            <div class="fm-checkbox">
+                                                                <label><input type="checkbox" asp-for="IsNewFeed" class="i-checks"> <i></i>IsNewFeed</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#Contents').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+                styleTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
+                height: 200,
+                minHeight: null,
+                maxHeight: null,
+                focus: true
+
+            });
+        });
+
+    </script>
+}

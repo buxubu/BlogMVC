@@ -1,0 +1,82 @@
+﻿@model BlogMVC.Models.CateProduct
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>CateProduct</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCatePro" />
+            <div class="form-group">
+                <label asp-for="CatName" class="control-label"></label>
+                <input asp-for="CatName" class="form-control" />
+                <span asp-validation-for="CatName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentId" class="control-label"></label>
+                <input asp-for="ParentId" class="form-control" />
+                <span asp-validation-for="ParentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Published" class="control-label"></label>
+                <input asp-for="Published" class="form-control" />
+                <span asp-validation-for="Published" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Thumb" class="control-label"></label>
+                <input asp-for="Thumb" class="form-control" />
+                <span asp-validation-for="Thumb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Alias" class="control-label"></label>
+                <input asp-for="Alias" class="form-control" />
+                <span asp-validation-for="Alias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaDesc" class="control-label"></label>
+                <input asp-for="MetaDesc" class="form-control" />
+                <span asp-validation-for="MetaDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaKey" class="control-label"></label>
+                <input asp-for="MetaKey" class="form-control" />
+                <span asp-validation-for="MetaKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cover" class="control-label"></label>
+                <input asp-for="Cover" class="form-control" />
+                <span asp-validation-for="Cover" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SchemaMakup" class="control-label"></label>
+                <input asp-for="SchemaMakup" class="form-control" />
+                <span asp-validation-for="SchemaMakup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

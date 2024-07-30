@@ -1,0 +1,51 @@
+﻿@model BlogMVC.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="normal-table-list mg-t-30">
+            <div class="bsc-tbl-cls">
+                <table class="table table-cl">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(model => model.FullName)</td>
+                            <td>@Html.DisplayFor(model => model.Email)</td>
+                            <td>@Html.DisplayFor(model => model.Phone)</td>
+                            <td>@Html.DisplayFor(model => model.Password)</td>
+                            <td>@Html.DisplayFor(model => model.Role.RoleName)</td>
+                            <td>
+                                @if (Model.Active == true)
+                                {
+                                    <span class="badge badge-primary">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-primary">NON-Active</span>
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.AccountId">Edit</a> |
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

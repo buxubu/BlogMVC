@@ -1,0 +1,102 @@
+﻿@using PagedList.Core.Mvc;
+@model PagedList.Core.IPagedList<BlogMVC.Models.Account>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>ACCOUNTS VIEW</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="data-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                    </div>
+                    <div class="table-responsive">
+                        <table id="data-table-basic" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Full Information
+                                    </th>
+                                    <th>
+                                        Role
+                                    </th>
+                                    <th>
+                                        Active
+                                    </th>
+                                    <th>CHỨC NĂNG</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <p>Full Name: @item.FullName</p>
+                                            <p>Email: @item.Email</p>
+                                            <p>Phone: @item.Phone</p>
+                                            <p>Create Date: @item.CreateDate</p>
+                                            <p>Last Login: @item.LastLogin</p>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                                        </td>
+                                        <td>
+                                            @if (item.Active == true)
+                                            {
+                                                <span class="badge badge-primary">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-primary">NON-Active</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.AccountId">Cập Nhật</a>
+                                            <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.AccountId">Xem</a>
+                                            <a class="btn btn-danger delete" data-id="@item.AccountId">Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <pager class="pager-container" list="@Model" options="@PagedListRenderOptions.Full" asp-action="Index" asp-controller="Categories" asp-area="Admin" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.1/dist/sweetalert2.min.js"></script>
+    <script type="text/javascript">
+
+        $('.delete').click(function () {
+            var idCate = $(this).attr("data-id");
+            var tb = confirm("You really want to delete !");
+            if (tb) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Delete","Categories")",
+                    dataType: "json",
+                    data: {
+                        id: idCate
+                    }
+                }).done(function (reponse) {
+                    alert("Delete Success");
+                    location.reload();
+                }).fail(function () {
+                    alert("ERROR, Vui lòng quay lại sau")
+                })
+            }
+        })
+
+    </script>
+}
